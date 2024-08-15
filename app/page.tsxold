@@ -1,0 +1,53 @@
+// Page.tsx
+"use client"
+import { Fragment } from 'react';
+import React from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+
+const Page = () => {
+  // State for managing the dialog open/close
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <button
+        className="px-4 py-2 text-white bg-blue-500 rounded-md"
+        onClick={() => setOpen(true)}
+      >
+        Open Dialog
+      </button>
+
+      {/* Dialog component */}
+      <Transition show={open} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          onClose={() => setOpen(false)}
+        >
+          <div className="flex items-center justify-center min-h-screen">
+            {/* Overlay */}
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+
+            {/* Dialog content */}
+            <div className="bg-white p-4 rounded-md">
+              <Dialog.Title className="text-lg font-medium mb-2">
+                Simple Dialog
+              </Dialog.Title>
+              <Dialog.Description className="text-gray-500 mb-4">
+                This is a simple example using Headless UI with Tailwind CSS.
+              </Dialog.Description>
+
+              <button
+                className="px-4 py-2 text-white bg-blue-500 rounded-md"
+                onClick={() => setOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </div>
+  );
+}
+export default Page;
